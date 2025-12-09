@@ -1,88 +1,68 @@
 export default function AboutEventContent() {
   return (
-    <div className="p-4 min-h-full">
+    <div className="p-6 min-h-full">
       {/* Event Header */}
-      <div className="mb-4">
-        <div className="w-full h-32 bg-gradient-to-br from-purple-400 to-pink-500 rounded-xl mb-3 flex items-center justify-center">
-          <span className="text-4xl">🎉</span>
-        </div>
-        <h2 className="text-lg font-bold text-slate-900 mb-1">Tech Conference 2024</h2>
-        <p className="text-[10px] text-slate-500">Annual Technology Summit</p>
+      <div className="mb-8 pb-6 border-b border-slate-100">
+        <h2 className="text-xl font-light text-slate-900 mb-1">Tech Conference 2024</h2>
+        <p className="text-xs text-slate-400">Annual Technology Summit</p>
       </div>
 
       {/* Event Details */}
-      <div className="space-y-3">
+      <div className="space-y-6">
         {/* Date & Time */}
-        <div className="bg-slate-50 rounded-xl p-3">
-          <div className="flex items-center gap-2 mb-2">
-            <span className="text-sm">📅</span>
-            <span className="text-xs font-bold text-slate-900">Date & Time</span>
-          </div>
-          <p className="text-[10px] text-slate-600 ml-6">Tue, Dec 9 • 10:30 - 11:30</p>
-          <p className="text-[10px] text-slate-500 ml-6">GMT+07:00 Jakarta</p>
+        <div>
+          <h3 className="text-[10px] font-medium text-slate-300 uppercase tracking-widest mb-3">Date & Time</h3>
+          <p className="text-xs text-slate-900">Tue, Dec 9 • 10:30 - 11:30</p>
+          <p className="text-xs text-slate-400 mt-1">GMT+07:00 Jakarta</p>
         </div>
 
         {/* Location */}
-        <div className="bg-slate-50 rounded-xl p-3">
-          <div className="flex items-center gap-2 mb-2">
-            <span className="text-sm">📍</span>
-            <span className="text-xs font-bold text-slate-900">Location</span>
-          </div>
-          <p className="text-[10px] text-slate-600 ml-6">Grand Ballroom, Hotel XYZ</p>
-          <p className="text-[10px] text-slate-500 ml-6">Jakarta, Indonesia</p>
+        <div>
+          <h3 className="text-[10px] font-medium text-slate-300 uppercase tracking-widest mb-3">Location</h3>
+          <p className="text-xs text-slate-900">Grand Ballroom, Hotel XYZ</p>
+          <p className="text-xs text-slate-400 mt-1">Jakarta, Indonesia</p>
         </div>
 
         {/* Description */}
-        <div className="bg-slate-50 rounded-xl p-3">
-          <div className="flex items-center gap-2 mb-2">
-            <span className="text-sm">📝</span>
-            <span className="text-xs font-bold text-slate-900">About</span>
-          </div>
-          <p className="text-[10px] text-slate-600 ml-6 leading-relaxed">
+        <div>
+          <h3 className="text-[10px] font-medium text-slate-300 uppercase tracking-widest mb-3">About</h3>
+          <p className="text-xs text-slate-600 leading-relaxed">
             Join us for an exciting day of innovation, networking, and learning. 
             Connect with industry leaders and explore the latest tech trends.
           </p>
         </div>
 
         {/* Event Options */}
-        <div className="bg-slate-50 rounded-xl p-3">
-          <div className="flex items-center gap-2 mb-2">
-            <span className="text-sm">🎫</span>
-            <span className="text-xs font-bold text-slate-900">Ticket Info</span>
-          </div>
-          <div className="ml-6 space-y-1">
-            <div className="flex justify-between items-center">
-              <span className="text-[10px] text-slate-600">Price</span>
-              <span className="text-[10px] font-bold text-green-600">Free</span>
+        <div>
+          <h3 className="text-[10px] font-medium text-slate-300 uppercase tracking-widest mb-3">Ticket Info</h3>
+          <div className="space-y-3">
+            <div className="flex justify-between items-center py-2 border-b border-slate-50">
+              <span className="text-xs text-slate-400">Price</span>
+              <span className="text-xs text-slate-900">Free</span>
             </div>
-            <div className="flex justify-between items-center">
-              <span className="text-[10px] text-slate-600">Capacity</span>
-              <span className="text-[10px] font-bold text-slate-900">Unlimited</span>
+            <div className="flex justify-between items-center py-2 border-b border-slate-50">
+              <span className="text-xs text-slate-400">Capacity</span>
+              <span className="text-xs text-slate-900">Unlimited</span>
             </div>
-            <div className="flex justify-between items-center">
-              <span className="text-[10px] text-slate-600">Approval</span>
-              <span className="text-[10px] font-bold text-blue-600">Required</span>
+            <div className="flex justify-between items-center py-2 border-b border-slate-50">
+              <span className="text-xs text-slate-400">Approval</span>
+              <span className="text-xs text-slate-900">Required</span>
             </div>
           </div>
         </div>
 
         {/* Theme */}
-        <div className="bg-slate-50 rounded-xl p-3">
-          <div className="flex items-center gap-2 mb-2">
-            <span className="text-sm">🎨</span>
-            <span className="text-xs font-bold text-slate-900">Theme</span>
-          </div>
-          <div className="ml-6">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-white rounded-lg border border-slate-200"></div>
-              <span className="text-[10px] text-slate-600">Minimal</span>
-            </div>
+        <div>
+          <h3 className="text-[10px] font-medium text-slate-300 uppercase tracking-widest mb-3">Theme</h3>
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-slate-50 rounded-lg border border-slate-100"></div>
+            <span className="text-xs text-slate-400">Minimal</span>
           </div>
         </div>
       </div>
 
       {/* Action Button */}
-      <button className="w-full mt-4 py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl transition shadow-lg text-xs">
+      <button className="w-full mt-8 py-3 bg-slate-900 hover:bg-slate-800 text-white font-normal rounded-lg transition text-xs">
         Create Event
       </button>
     </div>
