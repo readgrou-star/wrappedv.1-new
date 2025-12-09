@@ -8,12 +8,16 @@ import FileManagerContent from "@/components/features/file-manager-content";
 import ParticipantsContent from "@/components/features/participants-content";
 import EditorButton from "@/components/editor-button";
 import EditorSidebar from "@/components/editor-sidebar";
+import HeaderNav from "@/components/header-nav";
+import TwibbonButton from "@/components/twibbon-button";
+import TwibbonPopup from "@/components/twibbon-popup";
 
 export default function BuilderEditor() {
   const [showPopup, setShowPopup] = useState(false);
   const [showFilePreview, setShowFilePreview] = useState(false);
   const [selectedFile, setSelectedFile] = useState("");
   const [showEditorCard, setShowEditorCard] = useState(false);
+  const [showTwibbonPopup, setShowTwibbonPopup] = useState(false);
   const [background, setBackground] = useState("bg-gradient-to-br from-sky-400 to-blue-500");
   const [backgroundImage, setBackgroundImage] = useState<string | null>(null);
 
@@ -68,25 +72,10 @@ export default function BuilderEditor() {
         imageRendering: 'high-quality'
       } : {}}
     >
-      {/* Header - Top Right */}
-      <div className="absolute top-6 right-6 z-20">
-        <div className="bg-white/90 backdrop-blur-sm rounded-xl px-6 py-3 shadow-lg flex items-center gap-6">
-          <button className="text-xs font-semibold text-slate-700 hover:text-slate-900 transition">
-            Pricing
-          </button>
-          <button className="text-xs font-semibold text-slate-700 hover:text-slate-900 transition">
-            Use cases
-          </button>
-          <button className="text-xs font-semibold text-slate-700 hover:text-slate-900 transition">
-            Resources
-          </button>
-          <button className="text-xs font-semibold text-slate-700 hover:text-slate-900 transition">
-            What's new
-          </button>
-        </div>
-      </div>
+      {/* Header Navigation */}
+      <HeaderNav onTwibbonClick={() => setShowTwibbonPopup(true)} />
 
-      {/* Editor Button - Bottom Right */}
+      {/* Editor Button */}
       <EditorButton onClick={() => setShowEditorCard(!showEditorCard)} />
 
       {/* Core Features Card - Floating Card Stack */}
@@ -141,6 +130,12 @@ export default function BuilderEditor() {
         background={background}
         setBackground={setBackground}
         setBackgroundImage={setBackgroundImage}
+      />
+
+      {/* Twibbon Popup */}
+      <TwibbonPopup
+        isOpen={showTwibbonPopup}
+        onClose={() => setShowTwibbonPopup(false)}
       />
 
       {/* Popup Phone - Slide from Bottom */}
