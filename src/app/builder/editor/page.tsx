@@ -6,13 +6,16 @@ import AboutEventContent from "@/components/features/about-event-content";
 import FormContent from "@/components/features/form-content";
 import FileManagerContent from "@/components/features/file-manager-content";
 import ParticipantsContent from "@/components/features/participants-content";
+import EditorButton from "@/components/editor-button";
+import EditorSidebar from "@/components/editor-sidebar";
 
 export default function BuilderEditor() {
   const [showPopup, setShowPopup] = useState(false);
   const [showFilePreview, setShowFilePreview] = useState(false);
   const [selectedFile, setSelectedFile] = useState("");
   const [showEditorCard, setShowEditorCard] = useState(false);
-  const [activeTab, setActiveTab] = useState("design");
+  const [background, setBackground] = useState("bg-gradient-to-br from-sky-400 to-blue-500");
+  const [backgroundImage, setBackgroundImage] = useState<string | null>(null);
 
   // Handle file click - buka popup file preview
   const handleFileClick = (fileName: string) => {
@@ -55,16 +58,19 @@ export default function BuilderEditor() {
   ];
 
   return (
-    <div className="fixed inset-0 bg-gradient-to-br from-sky-400 to-blue-500">
+    <div 
+      className={`fixed inset-0 transition-colors duration-500 ${background}`}
+      style={backgroundImage ? {
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        imageRendering: 'high-quality'
+      } : {}}
+    >
       {/* Header - Top Right */}
       <div className="absolute top-6 right-6 z-20">
         <div className="bg-white/90 backdrop-blur-sm rounded-xl px-6 py-3 shadow-lg flex items-center gap-6">
-          <button 
-            onClick={() => setShowEditorCard(!showEditorCard)}
-            className="text-xs font-semibold text-slate-700 hover:text-slate-900 transition"
-          >
-            Editor
-          </button>
           <button className="text-xs font-semibold text-slate-700 hover:text-slate-900 transition">
             Pricing
           </button>
@@ -79,6 +85,9 @@ export default function BuilderEditor() {
           </button>
         </div>
       </div>
+
+      {/* Editor Button - Bottom Right */}
+      <EditorButton onClick={() => setShowEditorCard(!showEditorCard)} />
 
       {/* Core Features Card - Floating Card Stack */}
       <CoreFeaturesCard cards={featureCards} />
@@ -125,155 +134,14 @@ export default function BuilderEditor() {
         </div>
       </div>
 
-      {/* Editor Sidebar - Super Minimalist Total */}
-      <div
-        className={`fixed right-0 top-0 w-[700px] h-full bg-white transition-transform duration-500 ease-out z-30 shadow-2xl ${
-          showEditorCard ? "translate-x-0" : "translate-x-full"
-        }`}
-      >
-        <div className="h-full flex flex-col">
-          {/* Header */}
-          <div className="px-16 py-12 border-b border-slate-50">
-            <div className="flex items-center justify-between">
-              <h2 className="text-4xl font-extralight text-slate-900 tracking-tight">Editor</h2>
-              <button
-                onClick={() => setShowEditorCard(false)}
-                className="w-9 h-9 flex items-center justify-center hover:bg-slate-50 rounded-lg transition"
-              >
-                <span className="text-slate-400 text-xl font-extralight">×</span>
-              </button>
-            </div>
-          </div>
-
-          {/* Tabs */}
-          <div className="px-16 py-8 border-b border-slate-50">
-            <div className="flex items-center gap-12">
-              <button
-                onClick={() => setActiveTab("design")}
-                className={`text-sm font-normal transition relative pb-1 ${
-                  activeTab === "design"
-                    ? "text-slate-900"
-                    : "text-slate-300 hover:text-slate-500"
-                }`}
-              >
-                Design
-                {activeTab === "design" && (
-                  <div className="absolute bottom-0 left-0 right-0 h-px bg-slate-900"></div>
-                )}
-              </button>
-              <button
-                onClick={() => setActiveTab("preview")}
-                className={`text-sm font-normal transition relative pb-1 ${
-                  activeTab === "preview"
-                    ? "text-slate-900"
-                    : "text-slate-300 hover:text-slate-500"
-                }`}
-              >
-                Preview
-                {activeTab === "preview" && (
-                  <div className="absolute bottom-0 left-0 right-0 h-px bg-slate-900"></div>
-                )}
-              </button>
-              <button
-                onClick={() => setActiveTab("code")}
-                className={`text-sm font-normal transition relative pb-1 ${
-                  activeTab === "code"
-                    ? "text-slate-900"
-                    : "text-slate-300 hover:text-slate-500"
-                }`}
-              >
-                Code
-                {activeTab === "code" && (
-                  <div className="absolute bottom-0 left-0 right-0 h-px bg-slate-900"></div>
-                )}
-              </button>
-            </div>
-          </div>
-
-          {/* Content */}
-          <div className="flex-1 overflow-y-auto custom-scrollbar px-16 py-12">
-            <div className="space-y-16">
-              {activeTab === "design" && (
-                <>
-                  <div>
-                    <h3 className="text-[10px] font-medium text-slate-300 uppercase tracking-widest mb-8">Colors</h3>
-                    <div className="grid grid-cols-5 gap-5">
-                      <div className="aspect-square rounded-xl bg-blue-600 hover:scale-105 transition cursor-pointer"></div>
-                      <div className="aspect-square rounded-xl bg-purple-600 hover:scale-105 transition cursor-pointer"></div>
-                      <div className="aspect-square rounded-xl bg-pink-600 hover:scale-105 transition cursor-pointer"></div>
-                      <div className="aspect-square rounded-xl bg-slate-900 hover:scale-105 transition cursor-pointer"></div>
-                      <div className="aspect-square rounded-xl bg-emerald-600 hover:scale-105 transition cursor-pointer"></div>
-                    </div>
-                  </div>
-
-                  <div>
-                    <h3 className="text-[10px] font-medium text-slate-300 uppercase tracking-widest mb-8">Typography</h3>
-                    <div className="space-y-1">
-                      <div className="flex items-center justify-between py-5 border-b border-slate-50">
-                        <span className="text-sm text-slate-400">Font Family</span>
-                        <span className="text-sm text-slate-900">Inter</span>
-                      </div>
-                      <div className="flex items-center justify-between py-5 border-b border-slate-50">
-                        <span className="text-sm text-slate-400">Font Weight</span>
-                        <span className="text-sm text-slate-900">600</span>
-                      </div>
-                      <div className="flex items-center justify-between py-5 border-b border-slate-50">
-                        <span className="text-sm text-slate-400">Line Height</span>
-                        <span className="text-sm text-slate-900">1.5</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div>
-                    <h3 className="text-[10px] font-medium text-slate-300 uppercase tracking-widest mb-8">Spacing</h3>
-                    <input type="range" min="0" max="100" className="w-full h-px bg-slate-100 rounded-full appearance-none cursor-pointer" />
-                  </div>
-                </>
-              )}
-
-              {activeTab === "preview" && (
-                <>
-                  <div className="min-h-[600px] flex items-center justify-center">
-                    <div className="text-center">
-                      <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mx-auto mb-8">
-                        <span className="text-3xl">👁️</span>
-                      </div>
-                      <p className="text-sm text-slate-900 mb-2">Live Preview</p>
-                      <p className="text-xs text-slate-300">Your design will appear here</p>
-                    </div>
-                  </div>
-                </>
-              )}
-
-              {activeTab === "code" && (
-                <>
-                  <div className="bg-slate-900 rounded-xl p-10 font-mono text-xs text-green-400 leading-relaxed">
-                    <div className="mb-2">
-                      <span className="text-purple-400">const</span>{" "}
-                      <span className="text-blue-400">component</span> ={" "}
-                      <span className="text-yellow-400">()</span> =&gt; {"{"}
-                    </div>
-                    <div className="ml-4 mb-2">
-                      <span className="text-purple-400">return</span> (
-                    </div>
-                    <div className="ml-8 mb-2">
-                      &lt;<span className="text-pink-400">div</span>&gt;
-                    </div>
-                    <div className="ml-12 mb-2 text-slate-500">
-                      // Your code here
-                    </div>
-                    <div className="ml-8 mb-2">
-                      &lt;/<span className="text-pink-400">div</span>&gt;
-                    </div>
-                    <div className="ml-4 mb-2">)</div>
-                    <div>{"}"}</div>
-                  </div>
-                </>
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* Editor Sidebar */}
+      <EditorSidebar
+        isOpen={showEditorCard}
+        onClose={() => setShowEditorCard(false)}
+        background={background}
+        setBackground={setBackground}
+        setBackgroundImage={setBackgroundImage}
+      />
 
       {/* Popup Phone - Slide from Bottom */}
       <div

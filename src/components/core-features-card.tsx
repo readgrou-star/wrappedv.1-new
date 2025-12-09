@@ -82,7 +82,7 @@ export default function CoreFeaturesCard({ cards: initialCards }: CoreFeaturesCa
                 }
               >
                 {/* Card dengan Header dan Body */}
-                <div className="w-full bg-white rounded-3xl shadow-2xl overflow-hidden">
+                <div className="w-full bg-white rounded-xl shadow-2xl overflow-hidden">
                   {/* Card Header - Selalu Keliatan - Klik untuk bawa ke depan */}
                   <div
                     className={`w-full px-4 py-3 font-bold transition ${
