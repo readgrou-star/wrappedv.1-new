@@ -5,7 +5,7 @@ import CoreFeaturesCard from "@/components/core-features-card";
 import AboutEventContent from "@/components/features/about-event-content";
 import FormContent from "@/components/features/form-content";
 import FileManagerContent from "@/components/features/file-manager-content";
-import CheckInContent from "@/components/features/check-in-content";
+import ParticipantsContent from "@/components/features/participants-content";
 
 export default function BuilderEditor() {
   const [showPopup, setShowPopup] = useState(false);
@@ -49,8 +49,8 @@ export default function BuilderEditor() {
     },
     {
       id: 3,
-      name: "Check In",
-      content: <CheckInContent />
+      name: "Participants",
+      content: <ParticipantsContent />
     }
   ];
 
@@ -125,91 +125,121 @@ export default function BuilderEditor() {
         </div>
       </div>
 
-      {/* Editor Card - Slide from Right */}
+      {/* Editor Sidebar - Super Minimalist Total */}
       <div
-        className={`fixed right-0 bottom-0 w-[500px] bg-white rounded-l-2xl shadow-2xl transition-transform duration-500 ease-out z-30 ${
-          showEditorCard ? "translate-x-[calc(100%-480px)]" : "translate-x-full"
+        className={`fixed right-0 top-0 w-[700px] h-full bg-white transition-transform duration-500 ease-out z-30 shadow-2xl ${
+          showEditorCard ? "translate-x-0" : "translate-x-full"
         }`}
-        style={{ height: "85vh" }}
       >
-        <div className="h-full overflow-y-auto custom-scrollbar">
-          <div className="p-6">
-            {/* Drag Handle */}
-            <div className="flex justify-center mb-4">
-              <div className="w-12 h-1.5 bg-slate-300 rounded-full"></div>
+        <div className="h-full flex flex-col">
+          {/* Header */}
+          <div className="px-16 py-12 border-b border-slate-50">
+            <div className="flex items-center justify-between">
+              <h2 className="text-4xl font-extralight text-slate-900 tracking-tight">Editor</h2>
+              <button
+                onClick={() => setShowEditorCard(false)}
+                className="w-9 h-9 flex items-center justify-center hover:bg-slate-50 rounded-lg transition"
+              >
+                <span className="text-slate-400 text-xl font-extralight">×</span>
+              </button>
             </div>
+          </div>
 
-            {/* Close Button */}
-            <button
-              onClick={() => setShowEditorCard(false)}
-              className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center bg-slate-100 hover:bg-slate-200 rounded-full transition"
-            >
-              <span className="text-slate-600 font-bold">×</span>
-            </button>
-
-            {/* Tabs */}
-            <div className="flex items-center gap-2 mb-6 border-b border-slate-200 pb-2">
+          {/* Tabs */}
+          <div className="px-16 py-8 border-b border-slate-50">
+            <div className="flex items-center gap-12">
               <button
                 onClick={() => setActiveTab("design")}
-                className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition ${
+                className={`text-sm font-normal transition relative pb-1 ${
                   activeTab === "design"
-                    ? "bg-blue-600 text-white"
-                    : "text-slate-500 hover:text-slate-700 hover:bg-slate-100"
+                    ? "text-slate-900"
+                    : "text-slate-300 hover:text-slate-500"
                 }`}
               >
                 Design
+                {activeTab === "design" && (
+                  <div className="absolute bottom-0 left-0 right-0 h-px bg-slate-900"></div>
+                )}
               </button>
               <button
                 onClick={() => setActiveTab("preview")}
-                className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition ${
+                className={`text-sm font-normal transition relative pb-1 ${
                   activeTab === "preview"
-                    ? "bg-blue-600 text-white"
-                    : "text-slate-500 hover:text-slate-700 hover:bg-slate-100"
+                    ? "text-slate-900"
+                    : "text-slate-300 hover:text-slate-500"
                 }`}
               >
                 Preview
+                {activeTab === "preview" && (
+                  <div className="absolute bottom-0 left-0 right-0 h-px bg-slate-900"></div>
+                )}
               </button>
               <button
                 onClick={() => setActiveTab("code")}
-                className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition ${
+                className={`text-sm font-normal transition relative pb-1 ${
                   activeTab === "code"
-                    ? "bg-blue-600 text-white"
-                    : "text-slate-500 hover:text-slate-700 hover:bg-slate-100"
+                    ? "text-slate-900"
+                    : "text-slate-300 hover:text-slate-500"
                 }`}
               >
                 Code
+                {activeTab === "code" && (
+                  <div className="absolute bottom-0 left-0 right-0 h-px bg-slate-900"></div>
+                )}
               </button>
             </div>
+          </div>
 
-            {/* Content */}
-            <div className="space-y-4">
+          {/* Content */}
+          <div className="flex-1 overflow-y-auto custom-scrollbar px-16 py-12">
+            <div className="space-y-16">
               {activeTab === "design" && (
                 <>
-                  <h3 className="text-lg font-bold text-slate-900">Design View</h3>
-                  <div className="bg-slate-50 rounded-xl p-4 border border-slate-200">
-                    <h4 className="text-sm font-bold text-slate-900 mb-3">Colors</h4>
-                    <div className="flex gap-2">
-                      <div className="w-12 h-12 rounded-lg bg-blue-600"></div>
-                      <div className="w-12 h-12 rounded-lg bg-purple-600"></div>
-                      <div className="w-12 h-12 rounded-lg bg-pink-600"></div>
-                      <div className="w-12 h-12 rounded-lg bg-slate-900"></div>
+                  <div>
+                    <h3 className="text-[10px] font-medium text-slate-300 uppercase tracking-widest mb-8">Colors</h3>
+                    <div className="grid grid-cols-5 gap-5">
+                      <div className="aspect-square rounded-xl bg-blue-600 hover:scale-105 transition cursor-pointer"></div>
+                      <div className="aspect-square rounded-xl bg-purple-600 hover:scale-105 transition cursor-pointer"></div>
+                      <div className="aspect-square rounded-xl bg-pink-600 hover:scale-105 transition cursor-pointer"></div>
+                      <div className="aspect-square rounded-xl bg-slate-900 hover:scale-105 transition cursor-pointer"></div>
+                      <div className="aspect-square rounded-xl bg-emerald-600 hover:scale-105 transition cursor-pointer"></div>
                     </div>
                   </div>
-                  <div className="bg-slate-50 rounded-xl p-4 border border-slate-200">
-                    <h4 className="text-sm font-bold text-slate-900 mb-2">Typography</h4>
-                    <p className="text-xs text-slate-600">Font: Inter, System UI</p>
+
+                  <div>
+                    <h3 className="text-[10px] font-medium text-slate-300 uppercase tracking-widest mb-8">Typography</h3>
+                    <div className="space-y-1">
+                      <div className="flex items-center justify-between py-5 border-b border-slate-50">
+                        <span className="text-sm text-slate-400">Font Family</span>
+                        <span className="text-sm text-slate-900">Inter</span>
+                      </div>
+                      <div className="flex items-center justify-between py-5 border-b border-slate-50">
+                        <span className="text-sm text-slate-400">Font Weight</span>
+                        <span className="text-sm text-slate-900">600</span>
+                      </div>
+                      <div className="flex items-center justify-between py-5 border-b border-slate-50">
+                        <span className="text-sm text-slate-400">Line Height</span>
+                        <span className="text-sm text-slate-900">1.5</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h3 className="text-[10px] font-medium text-slate-300 uppercase tracking-widest mb-8">Spacing</h3>
+                    <input type="range" min="0" max="100" className="w-full h-px bg-slate-100 rounded-full appearance-none cursor-pointer" />
                   </div>
                 </>
               )}
 
               {activeTab === "preview" && (
                 <>
-                  <h3 className="text-lg font-bold text-slate-900">Preview</h3>
-                  <div className="bg-slate-100 rounded-xl p-12 min-h-[500px] flex items-center justify-center">
+                  <div className="min-h-[600px] flex items-center justify-center">
                     <div className="text-center">
-                      <div className="text-6xl mb-4">👁️</div>
-                      <p className="text-sm text-slate-600 font-semibold">Live Preview</p>
-                      <p className="text-xs text-slate-400 mt-2">Your design will appear here</p>
+                      <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mx-auto mb-8">
+                        <span className="text-3xl">👁️</span>
+                      </div>
+                      <p className="text-sm text-slate-900 mb-2">Live Preview</p>
+                      <p className="text-xs text-slate-300">Your design will appear here</p>
                     </div>
                   </div>
                 </>
@@ -217,8 +247,7 @@ export default function BuilderEditor() {
 
               {activeTab === "code" && (
                 <>
-                  <h3 className="text-lg font-bold text-slate-900">Code Editor</h3>
-                  <div className="bg-slate-900 rounded-xl p-4 font-mono text-xs text-green-400">
+                  <div className="bg-slate-900 rounded-xl p-10 font-mono text-xs text-green-400 leading-relaxed">
                     <div className="mb-2">
                       <span className="text-purple-400">const</span>{" "}
                       <span className="text-blue-400">component</span> ={" "}
@@ -230,7 +259,7 @@ export default function BuilderEditor() {
                     <div className="ml-8 mb-2">
                       &lt;<span className="text-pink-400">div</span>&gt;
                     </div>
-                    <div className="ml-12 mb-2 text-slate-400">
+                    <div className="ml-12 mb-2 text-slate-500">
                       // Your code here
                     </div>
                     <div className="ml-8 mb-2">
