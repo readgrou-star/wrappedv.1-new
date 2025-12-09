@@ -4,6 +4,8 @@ import { useState } from "react";
 import CoreFeaturesCard from "@/components/core-features-card";
 import AboutEventContent from "@/components/features/about-event-content";
 import FormContent from "@/components/features/form-content";
+import FileManagerContent from "@/components/features/file-manager-content";
+import CheckInContent from "@/components/features/check-in-content";
 
 export default function BuilderEditor() {
   const [showPopup, setShowPopup] = useState(false);
@@ -11,6 +13,22 @@ export default function BuilderEditor() {
   const [selectedFile, setSelectedFile] = useState("");
   const [showEditorCard, setShowEditorCard] = useState(false);
   const [activeTab, setActiveTab] = useState("design");
+
+  // Handle file click - buka popup file preview
+  const handleFileClick = (fileName: string) => {
+    if (showFilePreview && selectedFile !== fileName) {
+      // Jika preview sudah buka dengan file berbeda, slide down dulu
+      setShowFilePreview(false);
+      setTimeout(() => {
+        setSelectedFile(fileName);
+        setShowFilePreview(true);
+      }, 300);
+    } else {
+      // Jika preview tutup atau file sama, langsung buka
+      setSelectedFile(fileName);
+      setShowFilePreview(true);
+    }
+  };
 
   // Define modular feature cards - bisa tambah/kurang sesuai kebutuhan
   const featureCards = [
@@ -23,6 +41,16 @@ export default function BuilderEditor() {
       id: 1,
       name: "Form",
       content: <FormContent />
+    },
+    {
+      id: 2,
+      name: "File Manager",
+      content: <FileManagerContent onFileClick={handleFileClick} />
+    },
+    {
+      id: 3,
+      name: "Check In",
+      content: <CheckInContent />
     }
   ];
 
